@@ -1,0 +1,18 @@
+<div class="container col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <h3>AGREGAR TRABAJADORES</h3>
+        </div>
+        <div class="card-body">
+            <form  [formGroup]="formGroup">
+                <div class="form-group">
+                    <label for="">Nombre</label>
+                    <input id="nombre" type="text" class="form-control" formControlName="nombre" >
+                </div>
+                <button (click)="AgregarTrabajador()" class="btn btn-danger">Guardar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
