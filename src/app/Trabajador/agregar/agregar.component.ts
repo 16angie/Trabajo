@@ -11,27 +11,23 @@ import { FormControl } from '@angular/forms';
   templateUrl: './agregar.component.html',
   styleUrls: ['./agregar.component.css']
 })
-export class AgregarComponent implements OnInit {
+export class AgregarComponent {
 
-  
-  constructor(private route:Router,private service: ServicioTrabajadorService,private formBuilder:FormBuilder) { }
 
-  trabajador:Trabajador= new Trabajador();
+  constructor(private route: Router, private service: ServicioTrabajadorService, private formBuilder: FormBuilder) { }
+
   formGroup = this.formBuilder.group({
-    nombre:['']
+    nombre: ['']
   })
 
-  ngOnInit(): void {
-    this.trabajador.id=20;
-    this.trabajador.nombre = 'maeia';
-  }
-  
+  AgregarTrabajador() {
+    const trabajador: Trabajador = new Trabajador();
+    trabajador.nombre = this.formGroup.get('nombre').value;
 
-  AgregarTrabajador(){
-      this.service.agregarTrabajador(this.trabajador).subscribe(data=>{
-        console.log(data);
-        this.route.navigate(["listar"]);
-      })
+    this.service.agregarTrabajador(trabajador).subscribe(data => {
+      console.log(data);
+      this.route.navigate(["listar"]);
+    })
   }
 
 }

@@ -16,8 +16,8 @@
                         <td>{{trabajador.id}}</td>
                         <td>{{trabajador.nombre}}</td>
                         <td>
-                            <button >Editar Trabajador</button>
-                            <button >Eliminar Trabajador</button>
+                            <button (click)="clickEliminarActualizar(trabajador,'A')">Editar Trabajador</button>
+                            <button (click)="clickEliminarActualizar(trabajador,'E')">Eliminar Trabajador</button>
                         </td>
                     </tr>
                 </tbody>

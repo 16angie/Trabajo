@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Trabajador } from '../modelo/Trabajador';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,19 +9,32 @@ import { Trabajador } from '../modelo/Trabajador';
 export class ServicioTrabajadorService {
 
 
-constructor(private http: HttpClient ) { }
+  constructor(private http: HttpClient) { }
 
- Url="http://localhost:55916/test/trabajadores";
+  url: string = "/test/trabajadores";
+  private TRABAJADORES_LISTAR = `${environment.api}/trabajadores/listar`;
+  private TRABAJADORES_AGREGAR = `${environment.api}/trabajadores`;
+  private TRABAJADORES_ELIMINAR = `${environment.api}/trabajadores/`;
+  private TRABAJADORES_EDITAR = `${environment.api}/trabajadores/`;
 
-  getTrabajadores(){
-    return this.http.get<Trabajador[]>(this.Url+"/listar");
+
+  getTrabajadores() {
+    return this.http.get<Trabajador[]>(this.TRABAJADORES_LISTAR);
   }
 
-  editarTrabajador(id:number, trabajador :Trabajador){
-    return this.http.put<Trabajador>(this.Url+"/"+id,trabajador);
+  getTrabajadoresid(id:number) {
+    return this.http.get<Trabajador>(this.TRABAJADORES_EDITAR+id);
   }
 
-  agregarTrabajador(trabajador:Trabajador){
-    return this.http.post<Trabajador>(this.Url,trabajador);
+  editarTrabajador(id: number, trabajador: Trabajador) {
+    return this.http.put<Trabajador>(this.TRABAJADORES_EDITAR+id, trabajador);
+  }
+
+  agregarTrabajador(trabajador: Trabajador) {
+    return this.http.post<Trabajador>(this.TRABAJADORES_AGREGAR, trabajador);
+  }
+
+  eliminarTrabajador(id_t:number){
+    return this.http.delete<Trabajador>(this.TRABAJADORES_ELIMINAR+id_t);
   }
 }
